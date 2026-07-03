@@ -10,14 +10,15 @@ public class Main {
     {
 
         Student s1=new Student();
-        s1.setRoll(1);
-        s1.setName("John");
-        s1.setAge(20);
+        s1.setRoll(6);
+        s1.setName("Mansi");
+        s1.setAge(39);
 
-        Configuration cfg=new Configuration();
-        cfg.addAnnotatedClass(com.hib.Student.class);
-        cfg.configure();
+        Student s2=null;
 
+        Configuration cfg=new Configuration()
+                .addAnnotatedClass(com.hib.Student.class)
+                .configure();
         cfg.setProperty
                 ("hibernate.connection.password",
                         System.getenv("DB_password"));
@@ -25,10 +26,21 @@ public class Main {
         SessionFactory fs=cfg.buildSessionFactory();
         Session session=fs.openSession();
 
+        /*
+        SAVING DATA IN DATABASE
         Transaction ts=session.beginTransaction();
         session.persist(s1);
         ts.commit();
 
-        System.out.println(s1);
+         */
+
+
+
+        s2=session.find(Student.class,5);
+
+        session.close();
+        fs.close();
+
+        System.out.println(s2);
     }
 }
