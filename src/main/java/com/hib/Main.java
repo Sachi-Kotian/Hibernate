@@ -10,11 +10,18 @@ public class Main {
     {
 
         Student s1=new Student();
-        s1.setRoll(6);
-        s1.setName("Mansi");
-        s1.setAge(39);
+        s1.setRoll(2);
+        s1.setName("Ravi");
+        s1.setAge(50);
 
-        Student s2=null;
+        Student s2=new Student();
+        s2.setRoll(7);
+        s2.setName("Nick");
+        s2.setAge(30);
+
+
+
+        Student s3=null;
 
         Configuration cfg=new Configuration()
                 .addAnnotatedClass(com.hib.Student.class)
@@ -31,12 +38,32 @@ public class Main {
         Transaction ts=session.beginTransaction();
         session.persist(s1);
         ts.commit();
-
          */
 
 
-
+        /*
+        FETCHING DATA
         s2=session.find(Student.class,5);
+        */
+
+
+        /*
+
+        UPDATING DATA
+        Transaction ts= session.beginTransaction();
+        session.merge(s1);
+        session.merge(s2);
+        ts.commit();
+
+        */
+
+
+        //DELETING DATA
+        s3=session.find(Student.class,3);
+        Transaction ts=session.beginTransaction();
+        session.remove(s3);
+        ts.commit();
+
 
         session.close();
         fs.close();
